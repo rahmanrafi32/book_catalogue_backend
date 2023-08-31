@@ -14,3 +14,8 @@ export type IGenericResponse<T> = {
   };
   data: T;
 };
+
+export type IGenericErrorMessage = {
+  path: string | number;
+  message: string;
+};

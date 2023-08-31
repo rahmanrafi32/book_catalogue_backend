@@ -3,9 +3,10 @@ import { IErrorMessage } from '../../interfaces/errorMessage';
 import validationErrorHandler from '../errorHandlers/validationErrorHandler';
 import config from '../../config';
 import ApiError from '../errorHandlers/ApiError';
-import castErrorHandler from '../errorHandlers/castErrorHandler';
 import zodErrorHandler from '../errorHandlers/zodErrorHandler';
 import { ZodError } from 'zod';
+import { Prisma } from '@prisma/client';
+import handleClientError from '../errorHandlers/handleClientError';
 
 const globalErrorHandler: ErrorRequestHandler = (
   error,
@@ -17,11 +18,11 @@ const globalErrorHandler: ErrorRequestHandler = (
   let message = 'Internal Server Error';
   let errorMessages: IErrorMessage[] = [];
 
-  if (error?.name === 'ValidationError') {
-    const validationError = validationErrorHandler(error);
-    statusCode = validationError.statusCode;
-    message = validationError.message;
-    errorMessages = validationError.errorMessages;
+  if (error instanceof Prisma.PrismaClientValidationError) {
+    const simplifiedError = validationErrorHandler(error);
+    statusCode = simplifiedError.statusCode;
+    message = simplifiedError.message;
+    errorMessages = simplifiedError.errorMessages;
   } else if (error instanceof ZodError) {
     const zodError = zodErrorHandler(error);
     statusCode = zodError?.statusCode;
@@ -38,18 +39,11 @@ const globalErrorHandler: ErrorRequestHandler = (
           },
         ]
       : [];
-  } else if (error?.name === 'CastError') {
-    const castError = castErrorHandler(error);
-    statusCode = castError?.statusCode;
-    message = castError?.message;
-    errorMessages = castError?.message
-      ? [
-          {
-            path: 'CastError',
-            message: castError.message,
-          },
-        ]
-      : [];
+  } else if (error instanceof Prisma.PrismaClientKnownRequestError) {
+    const simplifiedError = handleClientError(error);
+    statusCode = simplifiedError.statusCode;
+    message = simplifiedError.message;
+    errorMessages = simplifiedError.errorMessages;
   } else if (error instanceof Error) {
     message = error?.message;
     errorMessages = error?.message

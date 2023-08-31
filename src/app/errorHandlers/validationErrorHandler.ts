@@ -1,23 +1,21 @@
-// import { ICommonErrorResponse } from '../../interfaces/commonErrorResponse';
-// import { IErrorMessage } from '../../interfaces/errorMessage';
-//
-// const validationErrorHandler = (
-//   err: mongoose.Error.ValidationError
-// ): ICommonErrorResponse => {
-//   const errors: IErrorMessage[] = Object.values(err.errors).map(
-//     (element: mongoose.Error.ValidatorError | mongoose.Error.CastError) => {
-//       return {
-//         path: element?.path,
-//         message: element?.message,
-//       };
-//     }
-//   );
-//   const statusCode = 400;
-//   return {
-//     message: 'Validation Error',
-//     statusCode,
-//     errorMessages: errors,
-//   };
-// };
-//
-// export default validationErrorHandler;
+import { ICommonErrorResponse } from '../../interfaces/commonErrorResponse';
+import { Prisma } from '@prisma/client';
+
+const validationErrorHandler = (
+  err: Prisma.PrismaClientValidationError
+): ICommonErrorResponse => {
+  const errors = [
+    {
+      path: '',
+      message: err.message,
+    },
+  ];
+  const statusCode = 400;
+  return {
+    statusCode,
+    message: 'Validation Error',
+    errorMessages: errors,
+  };
+};
+
+export default validationErrorHandler;
