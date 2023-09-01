@@ -64,6 +64,18 @@ const updateBook = asyncTryCatch(async (req: Request, res: Response) => {
   customResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
+    message: 'Book updated successfully',
+    data: result,
+  });
+});
+
+const deleteBook = asyncTryCatch(async (req: Request, res: Response) => {
+  const result = await bookService.deleteBook(req.params.id);
+
+  customResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Book deleted successfully',
     data: result,
   });
 });
@@ -74,4 +86,5 @@ export const bookController = {
   getBookByCategory,
   getBookById,
   updateBook,
+  deleteBook,
 };

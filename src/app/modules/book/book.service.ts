@@ -134,10 +134,22 @@ const updateBook = async (id: string, payload: Partial<Book>) => {
   });
 };
 
+const deleteBook = async (id: string) => {
+  const existingBook = await prisma.book.findUnique({ where: { id } });
+
+  if (!existingBook)
+    throw new ApiError(httpStatus.NOT_FOUND, 'Book does not found.');
+
+  return prisma.book.delete({
+    where: { id },
+  });
+};
+
 export const bookService = {
   createNewBook,
   getAllBooks,
   getBookByCategory,
   getBookById,
   updateBook,
+  deleteBook,
 };
