@@ -40,8 +40,9 @@ model Book {
   genre           String
   publicationDate DateTime
 
-  categoryId      String
-  category        Category          @relation(fields: [categoryId], references: [id])
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
   ReviewAndRating ReviewAndRating[]
 }
 
