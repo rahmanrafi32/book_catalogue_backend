@@ -11,12 +11,12 @@ const getAllCategories = async () => {
   return prisma.category.findMany();
 };
 
-// const getSingleCategory = async (id: string) => {
-//   return prisma.category.findUnique({
-//     where: { id },
-//   });
-// };
-//
+const getSingleCategory = async (id: string) => {
+  return prisma.category.findUnique({
+    where: { id },
+  });
+};
+
 // const updateCategory = async (id: string, payload: Partial<Category>) => {
 //   return prisma.category.update({
 //     where: { id },
@@ -33,7 +33,7 @@ const getAllCategories = async () => {
 export const categoryService = {
   createCategory,
   getAllCategories,
-  // getSingleCategory,
+  getSingleCategory,
   // updateCategory,
   // deleteCategory,
 };
