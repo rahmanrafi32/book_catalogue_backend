@@ -24,16 +24,16 @@ const updateCategory = async (id: string, payload: Partial<Category>) => {
   });
 };
 
-// const deleteCategory = async (id: string) => {
-//   return prisma.category.delete({
-//     where: { id },
-//   });
-// };
+const deleteCategory = async (id: string) => {
+  return prisma.category.delete({
+    where: { id },
+  });
+};
 
 export const categoryService = {
   createCategory,
   getAllCategories,
   getSingleCategory,
   updateCategory,
-  // deleteCategory,
+  deleteCategory,
 };

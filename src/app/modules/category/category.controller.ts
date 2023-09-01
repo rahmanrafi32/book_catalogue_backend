@@ -48,21 +48,21 @@ const updateCategory = asyncTryCatch(async (req: Request, res: Response) => {
   });
 });
 
-// const deleteCategory = asyncTryCatch(async (req: Request, res: Response) => {
-//   const result = await categoryService.deleteCategory(req.params.id);
-//
-//   customResponse(res, {
-//     statusCode: httpStatus.OK,
-//     success: true,
-//     message: 'Category deleted successfully.',
-//     data: result,
-//   });
-// });
+const deleteCategory = asyncTryCatch(async (req: Request, res: Response) => {
+  const result = await categoryService.deleteCategory(req.params.id);
+
+  customResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Category deleted successfully.',
+    data: result,
+  });
+});
 
 export const categoryController = {
   createCategory,
   getAllCategories,
   getSingleCategory,
   updateCategory,
-  // deleteCategory,
+  deleteCategory,
 };
