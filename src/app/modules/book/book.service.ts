@@ -4,6 +4,8 @@ import { IPaginationOptions } from '../../../interfaces/paginationOptions';
 import calculatePagination from '../../../helper/calculatePagination';
 import { IFilterOptions } from '../../../interfaces/filterOptions';
 import { searchableFields } from './book.constant';
+import ApiError from '../../errorHandlers/ApiError';
+import httpStatus from 'http-status';
 
 const createNewBook = async (payload: Book) => {
   return prisma.book.create({
@@ -117,9 +119,25 @@ const getBookById = async (id: string) => {
   });
 };
 
+const updateBook = async (id: string, payload: Partial<Book>) => {
+  const existingBook = await prisma.book.findUnique({ where: { id } });
+
+  if (!existingBook)
+    throw new ApiError(httpStatus.NOT_FOUND, 'Book does not found.');
+
+  return prisma.book.update({
+    where: { id },
+    data: payload,
+    include: {
+      category: true,
+    },
+  });
+};
+
 export const bookService = {
   createNewBook,
   getAllBooks,
   getBookByCategory,
   getBookById,
+  updateBook,
 };

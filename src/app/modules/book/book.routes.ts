@@ -17,4 +17,6 @@ router.post(
 router.get('/', bookController.getAllBooks);
 router.get('/category/:categoryId', bookController.getBookByCategory);
 router.get('/:id', bookController.getBookById);
+
+router.patch('/:id', auth(ENUM_USER_ROLE.ADMIN), bookController.updateBook);
 export const booksRoutes = router;

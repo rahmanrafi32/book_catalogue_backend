@@ -58,9 +58,20 @@ const getBookById = asyncTryCatch(async (req: Request, res: Response) => {
   });
 });
 
+const updateBook = asyncTryCatch(async (req: Request, res: Response) => {
+  const result = await bookService.updateBook(req.params.id, req.body);
+
+  customResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    data: result,
+  });
+});
+
 export const bookController = {
   createNewBook,
   getAllBooks,
   getBookByCategory,
   getBookById,
+  updateBook,
 };
