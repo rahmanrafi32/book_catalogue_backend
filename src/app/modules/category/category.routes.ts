@@ -16,14 +16,14 @@ router.post(
 
 router.get('/', categoryController.getAllCategories);
 router.get('/:id', categoryController.getSingleCategory);
-//
-// router.patch(
-//   '/:id',
-//   validateRequest(createCategory),
-//   auth(ENUM_USER_ROLE.ADMIN),
-//   categoryController.updateCategory
-// );
-//
+
+router.patch(
+  '/:id',
+  validateRequest(createCategory),
+  auth(ENUM_USER_ROLE.ADMIN),
+  categoryController.updateCategory
+);
+
 // router.delete(
 //   '/:id',
 //   auth(ENUM_USER_ROLE.ADMIN),

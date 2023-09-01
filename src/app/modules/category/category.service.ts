@@ -17,13 +17,13 @@ const getSingleCategory = async (id: string) => {
   });
 };
 
-// const updateCategory = async (id: string, payload: Partial<Category>) => {
-//   return prisma.category.update({
-//     where: { id },
-//     data: payload,
-//   });
-// };
-//
+const updateCategory = async (id: string, payload: Partial<Category>) => {
+  return prisma.category.update({
+    where: { id },
+    data: payload,
+  });
+};
+
 // const deleteCategory = async (id: string) => {
 //   return prisma.category.delete({
 //     where: { id },
@@ -34,6 +34,6 @@ export const categoryService = {
   createCategory,
   getAllCategories,
   getSingleCategory,
-  // updateCategory,
+  updateCategory,
   // deleteCategory,
 };
