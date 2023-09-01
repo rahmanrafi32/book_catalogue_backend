@@ -48,8 +48,19 @@ const getBookByCategory = asyncTryCatch(async (req: Request, res: Response) => {
   });
 });
 
+const getBookById = asyncTryCatch(async (req: Request, res: Response) => {
+  const result = await bookService.getBookById(req.params.id);
+
+  customResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    data: result,
+  });
+});
+
 export const bookController = {
   createNewBook,
   getAllBooks,
   getBookByCategory,
+  getBookById,
 };

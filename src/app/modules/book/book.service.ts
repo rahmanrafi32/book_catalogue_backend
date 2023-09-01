@@ -1,4 +1,4 @@
-import { Book, Prisma } from '@prisma/client';
+import { Book } from '@prisma/client';
 import prisma from '../../shared/prismaClient';
 import { IPaginationOptions } from '../../../interfaces/paginationOptions';
 import calculatePagination from '../../../helper/calculatePagination';
@@ -108,8 +108,18 @@ const getBookByCategory = async (
   };
 };
 
+const getBookById = async (id: string) => {
+  return prisma.book.findUnique({
+    where: { id },
+    include: {
+      category: true,
+    },
+  });
+};
+
 export const bookService = {
   createNewBook,
   getAllBooks,
   getBookByCategory,
+  getBookById,
 };
