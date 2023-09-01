@@ -1,4 +1,4 @@
-import { Book } from '@prisma/client';
+import { Book, Prisma } from '@prisma/client';
 import prisma from '../../shared/prismaClient';
 import { IPaginationOptions } from '../../../interfaces/paginationOptions';
 import calculatePagination from '../../../helper/calculatePagination';
@@ -77,7 +77,39 @@ const getAllBooks = async (
   };
 };
 
+const getBookByCategory = async (
+  id: string,
+  paginationOptions: IPaginationOptions
+) => {
+  const { limit, page, skip } = calculatePagination(paginationOptions);
+
+  const result = await prisma.book.findMany({
+    where: { categoryId: id },
+    include: {
+      category: true,
+    },
+    skip,
+    take: Number(limit),
+    orderBy:
+      paginationOptions.sortBy && paginationOptions.sortOrder
+        ? { [paginationOptions.sortBy]: paginationOptions.sortOrder }
+        : { title: 'desc' },
+  });
+
+  const total = await prisma.book.count();
+
+  return {
+    meta: {
+      total,
+      page,
+      limit,
+    },
+    data: result,
+  };
+};
+
 export const bookService = {
   createNewBook,
   getAllBooks,
+  getBookByCategory,
 };

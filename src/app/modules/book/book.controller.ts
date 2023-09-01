@@ -33,7 +33,23 @@ const getAllBooks = asyncTryCatch(async (req: Request, res: Response) => {
   });
 });
 
+const getBookByCategory = asyncTryCatch(async (req: Request, res: Response) => {
+  const paginationOptions = pick(req.query, paginationFields);
+  const result = await bookService.getBookByCategory(
+    req.params.categoryId,
+    paginationOptions
+  );
+
+  customResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    meta: result.meta,
+    data: result.data,
+  });
+});
+
 export const bookController = {
   createNewBook,
   getAllBooks,
+  getBookByCategory,
 };
