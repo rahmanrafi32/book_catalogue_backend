@@ -17,23 +17,22 @@ const getAllUser = async () => {
   });
 };
 
-// const getUserById = async (id: string) => {
-//
-//   return prisma.user.findUnique({
-//     where: {
-//       id,
-//     },
-//     select: {
-//       id: true,
-//       name: true,
-//       email: true,
-//       role: true,
-//       contactNo: true,
-//       address: true,
-//       profileImg: true,
-//     },
-//   });
-// };
+const getUserById = async (id: string) => {
+  return prisma.user.findUnique({
+    where: {
+      id,
+    },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+      contactNo: true,
+      address: true,
+      profileImg: true,
+    },
+  });
+};
 
 // const updateSingleUser = async (id: string, payload: Partial<User>) => {
 //
@@ -60,6 +59,6 @@ const getAllUser = async () => {
 
 export const userService = {
   getAllUser,
-  // getUserById,
+  getUserById,
   // updateSingleUser,
 };

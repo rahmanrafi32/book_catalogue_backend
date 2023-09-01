@@ -14,15 +14,15 @@ const getAllUsers = asyncTryCatch(async (req: Request, res: Response) => {
   });
 });
 
-// const getUserById = asyncTryCatch(async (req: Request, res: Response) => {
-//   const result = await userService.getUserById(req.params.id);
-//
-//   customResponse(res, {
-//     statusCode: httpStatus.OK,
-//     success: true,
-//     data: result,
-//   });
-// });
+const getUserById = asyncTryCatch(async (req: Request, res: Response) => {
+  const result = await userService.getUserById(req.params.id);
+
+  customResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    data: result,
+  });
+});
 
 // const updateSingleUser = asyncTryCatch(async (req: Request, res: Response) => {
 //   const result = await userService.updateSingleUser(req.params.id, req.body);
@@ -37,6 +37,6 @@ const getAllUsers = asyncTryCatch(async (req: Request, res: Response) => {
 
 export const userController = {
   getAllUsers,
-  // getUserById,
+  getUserById,
   // updateSingleUser,
 };

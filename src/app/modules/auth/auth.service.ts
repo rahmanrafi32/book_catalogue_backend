@@ -65,10 +65,10 @@ const signIn = async (payload: User) => {
       'Email or Password mismatched.'
     );
 
-  const { email: user } = existingUser;
+  const { email: user, role } = existingUser;
 
   const accessToken = jwtHelpers.createToken(
-    { user },
+    { user, role },
     config.jwt.secret as Secret,
     config.jwt.expires_in as string
   );
