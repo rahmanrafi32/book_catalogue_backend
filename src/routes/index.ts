@@ -4,6 +4,7 @@ import { authRoutes } from '../app/modules/auth/auth.routes';
 import { userRoutes } from '../app/modules/user/user.routes';
 import { categoryRoutes } from '../app/modules/category/category.routes';
 import { booksRoutes } from '../app/modules/book/book.routes';
+import { orderRoutes } from '../app/modules/order/order.routes';
 
 const router: Router = express.Router();
 
@@ -23,6 +24,10 @@ const moduleRoutes: routesMap[] = [
   {
     path: '/books',
     route: booksRoutes,
+  },
+  {
+    path: '/orders',
+    route: orderRoutes,
   },
 ];
 
