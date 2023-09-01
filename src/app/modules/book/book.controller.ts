@@ -15,6 +15,18 @@ const createNewBook = asyncTryCatch(async (req: Request, res: Response) => {
   });
 });
 
+const getAllBooks = asyncTryCatch(async (req: Request, res: Response) => {
+  const result = await bookService.getAllBooks();
+
+  customResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'New book added successfully.',
+    data: result,
+  });
+});
+
 export const bookController = {
   createNewBook,
+  getAllBooks,
 };

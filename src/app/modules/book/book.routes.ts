@@ -13,4 +13,6 @@ router.post(
   auth(ENUM_USER_ROLE.ADMIN),
   bookController.createNewBook
 );
+
+router.get('/', bookController.getAllBooks);
 export const booksRoutes = router;
