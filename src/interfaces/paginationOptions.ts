@@ -1,10 +1,8 @@
-import { SortOrder } from 'mongoose';
-
-export type paginationOption = {
+export type IPaginationOptions = {
   page?: number;
   limit?: number;
-  sortBy?: string | undefined;
-  sortOrder?: SortOrder;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
 };
 
 export type paginationReturn = {
@@ -12,5 +10,5 @@ export type paginationReturn = {
   limit: number;
   skip: number;
   sortBy: string;
-  sortOrder: SortOrder;
+  sortOrder: string;
 };
