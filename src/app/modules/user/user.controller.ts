@@ -35,8 +35,20 @@ const updateSingleUser = asyncTryCatch(async (req: Request, res: Response) => {
   });
 });
 
+const deleteUser = asyncTryCatch(async (req: Request, res: Response) => {
+  const result = await userService.deleteUser(req.params.id);
+
+  customResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User deleted successfully.',
+    data: result,
+  });
+});
+
 export const userController = {
   getAllUsers,
   getUserById,
   updateSingleUser,
+  deleteUser,
 };

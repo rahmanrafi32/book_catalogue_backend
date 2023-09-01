@@ -56,8 +56,30 @@ const updateSingleUser = async (id: string, payload: Partial<User>) => {
   });
 };
 
+const deleteUser = async (id: string) => {
+  const existingUser = await prisma.user.findUnique({ where: { id } });
+  if (!existingUser)
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found.');
+
+  return prisma.user.delete({
+    where: {
+      id,
+    },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      role: true,
+      contactNo: true,
+      address: true,
+      profileImg: true,
+    },
+  });
+};
+
 export const userService = {
   getAllUser,
   getUserById,
   updateSingleUser,
+  deleteUser,
 };
