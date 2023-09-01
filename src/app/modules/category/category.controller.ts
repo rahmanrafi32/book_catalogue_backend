@@ -15,17 +15,17 @@ const createCategory = asyncTryCatch(async (req: Request, res: Response) => {
   });
 });
 
-// const getAllCategories = asyncTryCatch(async (req: Request, res: Response) => {
-//   const result = await categoryService.getAllCategories();
-//
-//   customResponse(res, {
-//     statusCode: httpStatus.OK,
-//     success: true,
-//     message: 'Categories fetched successfully.',
-//     data: result,
-//   });
-// });
-//
+const getAllCategories = asyncTryCatch(async (req: Request, res: Response) => {
+  const result = await categoryService.getAllCategories();
+
+  customResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Categories fetched successfully.',
+    data: result,
+  });
+});
+
 // const getSingleCategory = asyncTryCatch(async (req: Request, res: Response) => {
 //   const result = await categoryService.getSingleCategory(req.params.id);
 //
@@ -61,7 +61,7 @@ const createCategory = asyncTryCatch(async (req: Request, res: Response) => {
 
 export const categoryController = {
   createCategory,
-  // getAllCategories,
+  getAllCategories,
   // getSingleCategory,
   // updateCategory,
   // deleteCategory,
