@@ -8,10 +8,10 @@ const router = express.Router();
 router.get('/', auth(ENUM_USER_ROLE.ADMIN), userController.getAllUsers);
 router.get('/:id', auth(ENUM_USER_ROLE.ADMIN), userController.getUserById);
 
-// router.patch(
-//   '/:id',
-//   auth(ENUM_USER_ROLE.ADMIN),
-//   userController.updateSingleUser
-// );
+router.patch(
+  '/:id',
+  auth(ENUM_USER_ROLE.ADMIN),
+  userController.updateSingleUser
+);
 
 export const userRoutes = router;

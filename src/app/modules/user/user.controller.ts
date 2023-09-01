@@ -24,19 +24,19 @@ const getUserById = asyncTryCatch(async (req: Request, res: Response) => {
   });
 });
 
-// const updateSingleUser = asyncTryCatch(async (req: Request, res: Response) => {
-//   const result = await userService.updateSingleUser(req.params.id, req.body);
-//
-//   customResponse(res, {
-//     statusCode: httpStatus.OK,
-//     success: true,
-//     message: 'User details updated successfully.',
-//     data: result,
-//   });
-// });
+const updateSingleUser = asyncTryCatch(async (req: Request, res: Response) => {
+  const result = await userService.updateSingleUser(req.params.id, req.body);
+
+  customResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'User details updated successfully.',
+    data: result,
+  });
+});
 
 export const userController = {
   getAllUsers,
   getUserById,
-  // updateSingleUser,
+  updateSingleUser,
 };
