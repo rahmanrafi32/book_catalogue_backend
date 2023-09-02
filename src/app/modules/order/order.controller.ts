@@ -25,7 +25,18 @@ const getAllOrders = asyncTryCatch(async (req: Request, res: Response) => {
   });
 });
 
+const singleOrderById = asyncTryCatch(async (req: Request, res: Response) => {
+  const result = await orderService.singleOrderById(req.params.id, req.user);
+
+  customResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    data: result,
+  });
+});
+
 export const orderController = {
   createOrder,
   getAllOrders,
+  singleOrderById,
 };

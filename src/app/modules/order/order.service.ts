@@ -39,7 +39,38 @@ const getAllOrders = async (user: JwtPayload) => {
     },
   });
 };
+
+const singleOrderById = async (id: string, user: JwtPayload) => {
+  const { user: email } = user;
+
+  const condition: Prisma.OrderWhereInput = {
+    AND: {
+      user: {
+        email: email,
+      },
+      id,
+    },
+  };
+
+  return prisma.order.findMany({
+    where: condition,
+    include: {
+      user: {
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          role: true,
+          contactNo: true,
+          address: true,
+          profileImg: true,
+        },
+      },
+    },
+  });
+};
 export const orderService = {
   createOrder,
   getAllOrders,
+  singleOrderById,
 };
