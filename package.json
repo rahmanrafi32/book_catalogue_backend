@@ -4,9 +4,11 @@
   "main": "./src/server.ts",
   "scripts": {
     "dev": "tsnd --respawn src/server.ts",
+    "start": "node dist/server.js",
     "lint": "eslint --ignore-path .eslintignore --ext .js,.ts .",
     "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "lint-prettier": "yarn lint && yarn prettier",
+    "postinstall": "prisma generate",
     "build": "tsc"
   },
   "license": "MIT",
